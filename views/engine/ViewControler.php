@@ -29,9 +29,9 @@ class ViewControler
         $this->compositeView = new CompositeView();
     }
 
-    public function attach($partialView, $partialViewId = '')
+    public function attach($partialView, $partialViewId = '', $position = PUSH_VIEW)
     {
-        $this->compositeView->attach_view($partialView, $partialViewId);
+        $this->compositeView->attach_view($partialView, $partialViewId, $position);
     }
 
     public function set_layout($layoutName) {

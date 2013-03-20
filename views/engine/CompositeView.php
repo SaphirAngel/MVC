@@ -7,17 +7,24 @@
  * To change this template use File | Settings | File Templates.
  */
 
+define('PUSH_VIEW', 1);
+define('UNSHIFT_VIEW', 2);
+
+
 class CompositeView
 {
     private $viewList = array();
     private $blockList = array();
 
-    public function attach_view($view, $key = '')
+    public function attach_view($view, $key = '', $position = PUSH_VIEW)
     {
         if (!empty($key) && !in_array($view, $this->blockList))
             $this->blockList[$key] = $view;
         else if (empty($key) && !in_array($view, $this->viewList)) {
-            $this->viewList = $view;
+            if ($position === PUSH_VIEW)
+                $this->viewList[] = $view;
+            else if ($position === UNSHIFT_VIEW)
+                array_unshift($this->viewList, $view);
         }
 
         return $this; //On retourne l'objet pour pouvoir chainer les attach
